@@ -1,0 +1,146 @@
+                org     V.SCF
+GPAGES          rmb     1               ; NUMBER OF GRAPHICS PAGES
+RESOL           rmb     1               ; RESOLUTION
+BYTES           rmb     1               ; FLAG FOR BYTE PAIRS ACROSS SCREEN 0=40 ; 1=80
+BYTFAC          rmb     2               ; FACTOR USED IN COOORDINATE/MEMORY BYTE TRANSFORMATION
+BYTCONST        rmb     2
+COL16           rmb     1               ; FLAG INDICATING 16 COLOUR MODE
+ONEBYTE         rmb     1               ; INDICATES ONLY ONE BYTE USED 640 X 512 2 COLOUR MODE
+BGCOL           rmb     1               ; BACKGROUND COLOUR
+DRCOL           rmb     1               ; DRAWING COLOUR
+COL0            rmb     1               ; COLOUR 0 OF SCREEN/BORDER FOR COLOUR MAP
+COL1            rmb     1               ; COLOUR 1
+COL2            rmb     1               ; COLOUR 2
+COL3            rmb     1               ; COLOUR 3
+GPBGCOL         rmb     1               ; BACKGROUND COLOUR OF GPRINT
+XMAX            rmb     2               ; MAX VALUES OF X AND Y
+YMAX            rmb     2
+
+CPOSX           rmb     2               ; CURRENT X COORD OF CURSOR
+CPOSY           rmb     2               ; CURRENT Y COORD OF CURSOR
+XTRAN           rmb     2               ; CURRENT X TRANSLATION
+YTRAN           rmb     2               ; CURRENT Y TRANSLATION
+ROTAT           rmb     2               ; CURRENT ROTATION
+SINTH           rmb     2               ; SINE OF ANGLE OF ROTATION
+COSTH           rmb     2               ; COSINE OF ANGLE OF ROTATION
+XSCALE          rmb     2               ; CURRENT X SCALE FACTOR
+YSCALE          rmb     2               ; CURRENT Y SCALE FACTOR
+MAT1            rmb     2               ; )
+MAT2            rmb     2               ; )TRANSFORM MATRIX
+MAT3            rmb     2               ; )ELEMENTS
+MAT4            rmb     2               ; )
+
+TRFLAG          rmb     1               ; TRANSFORM FLAG
+ABFLAG          rmb     1               ; ABORT FLAG * BORDER FLAG
+DMPFLAG         rmb     1               ; DUMP FLAG
+INTFLAG         rmb     1               ; INTEGER FLAG
+EOSFLAG         rmb     1               ; END OF SEQUENCE FLAG
+NUMFLAG         rmb     1               ; NUMBER FLAG
+SPFLAG          rmb     1               ; SPACE FLAG
+DPFLAG          rmb     1               ; DECIMAL POINT FLAG
+CHRFLAG         rmb     1               ; CHARACTER FLAG
+ESCFLAG         rmb     1               ; ESCAPE SEQUENCE FLAG
+ASIGN           rmb     1               ; SIGN FLAG FOR 2'S COMP.
+OVRFLW          rmb     1               ; OVERFLOW ERROR IN CALCULATIONS
+DFLAG           rmb     1               ; DEFAULT FLAG
+NPCOL           rmb     1               ; COLOUR NOT TO PLOT IN GPUT
+PLTMOD          rmb     1               ; PLOT MODE FLAG
+OOR             rmb     1               ; OUT OF RANGE FLAG FOR INTEGER ACQUISITION
+PNTFLAG         rmb     1               ; NO STACK ENTRY FLAG FOR PAINT ROUTINE
+GPTFLAG         rmb     1               ; GPRINT FLAG
+PLFLAG          rmb     1               ; PLOT FLAG
+
+PMIN            rmb     1               ; MIN VALUE OF EXPECTED PARAMETER
+N1              rmb     2               ; )USED FOR ASCII INTEGER
+N2              rmb     2               ; )ACQUISITION
+RES             rmb     4               ; TEMP WORKSPACE FOR INTERMEDIATE RESULT
+CCOUNT          rmb     2               ; GEN. PURP. 2 BYTE COUNTER
+COUNT           rmb     1               ; GENERAL PURPOSE COUNTER
+
+DCHAR           rmb     1               ; DRAW STRING CHARACTER
+DMVAL           rmb     2               ; DRAW OR MOVE VALUE
+HEAD            rmb     2               ; HEADING FOR DRAW
+HCOS            rmb     2               ; COSINE OF HEADING
+HSIN            rmb     2               ; SINE
+
+RADIUS          rmb     2               ; RADIUS OF CIRCLE
+TH1             rmb     2               ; START ANGLE OF ARC
+TH2             rmb     2               ; FINISH ANGLE OF ARC
+XP              rmb     4               ; ARC POINT REL TO (0,0)
+YP              rmb     4               ; CENTRE
+SHFCNT          rmb     1               ; SHIFT COUNTER FOR CIRCLE PLOTING
+SHFT0           rmb     1               ; ) SHIFTS REQUIRED
+SHFT1           rmb     1               ; ) IN INCREMENTAL
+SHFT2           rmb     1               ; ) CIRCLE D.Proc
+XEND            rmb     2               ; )X AND Y OF END OF ARC
+YEND            rmb     2               ; )
+XCENT           rmb     2               ; X & Y OF CENTRE OF ARC
+YCENT           rmb     2               ; )
+
+TX0             rmb     2               ; )START POINT FOR PLOT LINE
+TY0             rmb     2               ; )
+TX1             rmb     2               ; )END POINT FOR PLOT LINE
+TY1             rmb     2               ; )
+LASTX           rmb     2               ; LAST POINT PLOTTED (USED IF PMODE=2)
+LASTY           rmb     2               ; LAST POINT PLOTTED (USED IF PMODE=2)
+XX              rmb     2               ; TEMP WORK SPACE FOR X COORD
+YY              rmb     2               ; TEMP WORKSPACE FOR Y COORD
+DX              rmb     2               ; )X,Y INCREMENTS FOR LINE PLOT
+DY              rmb     2               ; )ABSOLUTE VALUES
+ERR             rmb     2               ; )ERROR AND INCREMENT FUNCTIONS
+SIGNDX          rmb     2               ; SIGN OF X INCREMENT
+SIGNDY          rmb     2               ; SIGN OF Y INCREMENT
+INC1            rmb     2               ; )FOR LINE PLOTTING
+INC2            rmb     2               ; )
+
+STKENTS         rmb     1               ; PAINT ROUTINE NUMBER OF STACK ENTRIES MADE
+STKSTRT         rmb     2               ; PAINT ROUTINE INITIAL STACK POINTER
+SHFLAG          rmb     1               ; SHIFT FLAG
+SHMSK           rmb     1               ; SHIFT MASK
+SHMSKX          rmb     1               ; SHIFT MASK USED FOR X SHIFT IN MEMSHIFT
+GETMSK          rmb     1               ; GET MASK FOR BOTH BYTES
+GETMSKS         rmb     1               ; SHIFTED GET MASK FOR BOTH BYTES
+BLKMSK          rmb     1               ; BLANK MASK FOR BOTH BYTES
+BCMSK1          rmb     1               ; BACKGROUND COLOUR MASK LOWER BYTE
+BCMSK2          rmb     1               ; HIGHER BYTE
+DCMSK1          rmb     1               ; DRAW COLOUR MASK FOR LOWER BYTE
+DCMSK2          rmb     1               ; HIGHER BYTE
+DCMSK1S         rmb     1               ; SHIFTED DRAW COLOUR MASK LOW BYTE
+DCMSK2S         rmb     1               ; SHIFTED DRAW COLOUR MASK HIGH BYTE
+DBMSK1          rmb     1               ; DOUBLE BYTE BLANK MASK FOR LOWER BYTES
+*                                   2 BYTE OR BORDER COLOUR MASK FOR LOW BYTE  1 BYTE
+DBMSK1S         rmb     1               ; SHIFTED BORDER COLOUR LOW BYTE
+DBMSK2          rmb     1               ; DOUBLE BYTE BLANK MSK FOR HIGHER BYTES
+*                                   2 BYTE OR BORDER COLOUR MASK FOR HIGH BYTE  1 BYTE
+DBMSK2S         rmb     1               ; SHIFTED BORDER COLOUR MASK FOR HIGH BYTE
+
+CGPAGE          rmb     2               ; RELATIVE PHYS. ADDR. OF START OF DRAW PAGE
+CDPAGE          rmb     2               ; RELATIVE PHYS. ADDR. OF START OF DISPLAY PAGE
+MCONST          rmb     2               ; PHYS MEM CONSTANT USED IN PPLOT
+PSTART          rmb     2               ; PHYS ADDR OF START OF MEMORY TO GCLEAR
+PEND            rmb     2               ; PHYS ADDR OF END OF MEMORY TO GCLEAR
+PEND2K          rmb     2               ; PHYS ADDR OF END OF 4K BLOCK
+LSTART          rmb     2               ; LOGICAL ADDR OF START OF 4K BLOCK
+LEND4K          rmb     2               ; LOGICAL ADDR OF END OF 4K BLOCK
+LMEM1           rmb     2               ; LOGICAL ADDR OF LOWER BYTE
+LMEM2           rmb     2
+MEMSTRT         rmb     2               ; PHYS ADDR OF START OF GRAPHICS MEMORY
+MYBLK           rmb     1               ; GRAPHICS BLOCK CURRENTLY MAPPED IN (LOWER BYTES)
+NEWBLK          rmb     1               ; GRAPHICS BLOCK REQD TO BE MAPPED IN (LOWER BYTES)
+LBADDR          rmb     2               ; BASE ADDRESS OF LOWER LOGICAL BLOCK
+
+CRTENT          rmb     2               ; CRT TABLE ENTRY POINT
+TABENT          rmb     2               ; COLOUR MASK TABLE ENTRY POINT
+LINKADR         rmb     2               ; ADDRESS OF LINKED CHRSET MODULE
+LINKENT         rmb     2               ; ENTRY POINT OF CHARACTER SET MODULE
+PVECTOR         rmb     2               ; PARAMETER VECTOR
+ACTION          rmb     1               ; CONTROL CODE FOR REQUIRED ACTION ROUTINE
+ERROR           rmb     1               ; ERROR CODE
+GFXFLAG         rmb     1               ; GRAPHICS MODE FLAG
+GFXDISP         rmb     1               ; GRAPHICS DISPLAY FLAG
+V.GRAFIX        rmb     1               ; IN GRAPHICS MODE/TEXT MODE FLAG
+BINARY          rmb     1               ; FLAG FOR ASCII/BINARY DATA
+
+BUFPON          rmb     2               ; CURRENT PARAMETER BUFFER POINTER
+BUFFER          rmb     10
+GPBUFF          rmb     256             ; GPUT/GGET BUFFER

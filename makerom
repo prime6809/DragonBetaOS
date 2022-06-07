@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]
+then
+  echo "must supply a rom prefix"
+else
+
+  PREFIX=$1
+  ROMDIR=build/roms
+  ROMNAME=$PREFIX.rom
+  newsize=$((1024 * 16))
+  filesize=$(stat -c "%s" $ROMDIR/$PREFIX.part)
+  padsize=$((newsize - filesize))
+  rm -f $ROMDIR/$ROMNAME
+  echo $newsize $padsize $ROMDIR/$ROMNAME
+  touch $ROMDIR/$ROMNAME
+  os9 padrom -c=\$39 "$padsize" $ROMDIR/$ROMNAME
+  cat $ROMDIR/$PREFIX.part >> $ROMDIR/$ROMNAME
+  rm -f $ROMDIR/$PREFIX-boot128k.rom
+  touch $ROMDIR/$PREFIX-boot128k.rom
+  os9 padrom -c255 114688 $ROMDIR/$PREFIX-boot128k.rom
+  cat $ROMDIR/$ROMNAME >> $ROMDIR/$PREFIX-boot128k.rom
+fi

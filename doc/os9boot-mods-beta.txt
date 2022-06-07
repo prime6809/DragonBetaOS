@@ -1,0 +1,34 @@
+Dragon Beta OS9Boot		Bin		Src	edition
+Busting module OS9p2...		Y		Y	3
+Busting module Init...		Y		Y	2
+Busting module IOMan...		Y		Y	
+Busting module Clock...		Y		Y
+Busting module SysGo...		Y		Y
+Busting module RBF...		Y		Y	2	
+Busting module SCF...		Y		Y
+Busting module PipeMan...	Y		Y	2
+Busting module ACIA51...	Y		Y
+Busting module PIA...		Y		Y	2
+Busting module screen...	Y		Y	
+Busting module Piper...		Y		Y	2
+Busting module d0...		Y		Y
+Busting module d1...		Y		Y
+Busting module d2...		Y		Y
+Busting module d3...		Y		Y
+Busting module f0...		Y		Y
+Busting module f1...		Y		Y
+Busting module f2...		Y		Y
+Busting module f3...		Y		Y
+Busting module dd0...		Y		Y
+Busting module dd1...		Y		Y
+Busting module dd2...		Y		Y
+Busting module dd3...		Y		Y
+Busting module fd0...		Y		Y
+Busting module fd1...		Y		Y
+Busting module fd2...		Y		Y
+Busting module fd3...		Y		Y
+Busting module term...		Y		Y	2
+Busting module t1...		Y		Y	2
+Busting module p...		Y		Y	2
+Busting module p1...		not present	no	2
+Busting module Pipe...		Y		Y	2

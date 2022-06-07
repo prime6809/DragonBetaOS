@@ -1,0 +1,79 @@
+Command		Status
+
+asm
+attr		Used Modified nitros source merged with disassembly, 
+			assembles bin equivilent
+backup		OK, commented disassembily
+basic09		patched by vitway, so will need disassembling.
+binex		Used Nitros source, modified to compile to be binary 
+			equivilent
+build		OK		
+callmenu	dis, contains basic09 icode.
+cmp		dis, Looks like it was written in C, comments in Nitros9 
+			cmp src support this as they note it's re-writtin 
+			in asm.
+copy		OK
+d		dis, seems to be another version of dir.
+date		OK
+dcheck		dis, looks to be a compiled program, probably C.
+debug
+del		OK
+deldir		OK, Commented disassembly.
+dir		OK
+dircopy		dis, looks like may be 3rd party and compiled.
+display		OK, Commented disassembly.
+dsave		dis, looks like it was written in C or Pascal, certainly
+			a complied language.
+dump		OK
+echo		OK
+edit		dis, assembles
+exbin		OK, Commented disassembly.
+format		OK, Commented disassembly.
+free		OK
+graphics	See below.
+ident		OK
+link		OK
+list		OK
+load		OK
+login		OK
+makdir		OK
+mdir		OK, Commented disassembly. 
+merge		OK
+mfree		OK, Commented disassembly.
+os9gen		OK, Commented disassembly.
+patch		dis
+procs		OK, Commented disassembly.
+pwd		Used Modified nitros source, assembles bin equivilent
+pxd		Used Modified nitros source, assembles bin equivilent
+rename		OK	
+runb
+save		OK
+setime		OK
+shell		OK
+sleep		OK
+tee		OK
+tmode		Based on D64 tmode src modified to add Beta oprtions...
+			as this is probably what DD did!
+tsmon		OK
+unlink		OK
+utils		This is a file containg :
+			copy, del, dir, attr, merge, backup, rename all as
+			one file, so that they can be quickly loaded together.
+verify		OK
+wait		dis, looks compiled, C probably
+xmode		OK
+
+graphics is made up of two joined modules gfxpack, the actual graphics driver 
+and basext the interface module for basic09. Since chrset is aslo part of the 
+graphics subsystem it is also listed here
+gfxpack		OK, original vitway source
+basext		OK, partially commented disassembily
+chrset		OK, disassembily
+
+Status :
+OK 	I have source that compiles as binary equivilent.
+dis	I have a bare disassembly made with disasm from nitros.
+other	as comments
+blank	I have not tackled yet. For graphics and chrset I believe the source is 
+	on one of the beta disks.
+

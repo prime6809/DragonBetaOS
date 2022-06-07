@@ -1,0 +1,48 @@
+*
+* Controller commands
+*
+F.WRIT          equ     $A8             ; write sector
+F.READ          equ     $88             ; read sector
+F.SEEK          equ     $18             ; seek
+F.STPI          equ     $48             ; step in
+F.REST          equ     $08             ; restore
+F.WRTR          equ     $F0             ; write track
+F.TERM          equ     $D0             ; forced terminate
+*
+* Controller registers
+*
+                org     0               
+STTREG          equ     .               ; status register
+CMDREG          rmb     1               ; command register
+TRKREG          rmb     1               ; track register
+SECREG          rmb     1               ; sector register
+DATREG          rmb     1               ; data register
+
+*
+* WD command flags, ored with command
+*
+
+SideFlag	equ	%00000010	; select side 1
+
+*
+* WD2797 status register bits
+*
+
+NotReady	equ	%10000000	; Not ready
+WrProt		equ	%01000000	; Write protect
+HDLoad		equ	%00100000	; Head loaded
+SeekErr		equ	%00010000	; Seek error
+CRCErr		equ	%00001000	; CRC error
+TR00		equ	%00000100	; At track 0
+Index		equ	%00000010	; index pulse
+Busy		equ	%00000001	; Controller busy
+
+*
+* PIA equates
+*
+INTPIA          equ     DAT.Task        ; interrupt port data reg
+INTBIT          equ     $80             ; interrupt flag bit
+B.HeadLd	equ	$04		; head load
+B.Motor         equ     $10             ; motor-on bit
+B.PreCmp        equ     $20             ; precomp-on bit
+B.DblDen        equ     $40             ; double density on bit

@@ -1,0 +1,55 @@
+.OS9 disks are raw arrays of sectors, the first part of the first sector on
+the disk defines the disk layout.
+
+Generally this will be 40 or 80 tracks of either 16 or 18 sectors single or
+double sided. This is generally double density (MFM) format
+Some disks will however have a different number of sectors on track 0 which
+will be single density (FM) format. 
+This can all be determined from the header in the first sector.
+
+All multi-byte words will be in Motorola format with the MSB in the lowest
+location.
+
+Name	Size	Purpose
+DD.TOT 	3       Total number of sectors 
+DD.TKS  1       Track size in sectors
+DD.MAP  2       Number of bytes in allocation bit map
+DD.BIT  2       Number of sectors/bit
+DD.DIR  3       Address of root directory fd
+DD.OWN  2       Owner
+DD.ATT  1       Attributes
+DD.DSK  2       Disk id
+DD.FMT  1       Disk format; density/sides
+DD.SPT  2       Sectors/track
+DD.RES  2       Reserved for future use
+DD.BT	3       System bootstrap sector
+DD.BSZ	2       Size of system bootstrap
+DD.DAT	5       Creation date
+DD.NAM	32      Volume name
+DD.OPT	32      option area
+
+The DD.OPT area contains the following :
+
+TYPE	1       Device type
+PD.DRV  1       Drive number
+PD.STP  1       Step rate
+PD.TYP  1       Disk device type (5' 8' other)
+PD.DNS  1       Density capability
+PD.CYL  2       Number of cylinders
+PD.SID  1       Number of surfaces
+PD.VFY  1       0=verify disk writes
+PD.SCT  2       Default sectors/track
+PD.T0S  2       Default sectors/track tr00,s0
+PD.ILV  1       Sector interleave offset
+
+
+DD.TOT will be : 
+(((number of tracks * number of sides)-1) * sectors per track) + track 0 sectors
+
+The encoding of DD.FMt is as follows :
+
+FMT.SIDE       %00000001           Single Sided=0, Double Sided=1
+FMT.DNS        %00000010           Single Density=0, Double Density=1
+FMT.TDNS       %00000100           Track Density: 48/135 TPI=0, 96 TPI=1
+FMT.T0DN       %00100000           Track 0 Density, see FMT.DNS
+

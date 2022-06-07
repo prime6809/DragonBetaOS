@@ -1,0 +1,188 @@
+#
+# Makefile for building the OS-9 modules (and utilities) for DragonMMC
+#
+
+include beta.mk
+
+AS=lwasm
+ASFLAGS=--6809 -fos9 --pragma=condundefzero,nosymbolcase -I $(DEFS)
+ASOUTC=-o$(CMDDIR)
+ASOUTS=-o$(SYSDIR)
+
+ASLIST=-llisting
+
+#CMDS=attr backup binex build copy date del deldir dir display dsave dump echo edit \
+#	 exbin free format graphics ident link list load login makdir merge mfree procs \
+#	 pwd pxd rename save setime shell sleep tee tmode tmode tsmon unlink utils \
+#	 verify xmode
+
+#GFX=basext chrset gfxpack
+
+ATTRS=-e -q
+
+all: cmds syscmds
+
+cmds: $(CMDS)
+
+syscmds: $(SYSCMDS)
+
+.PHONY: build
+
+#
+# Commands
+#
+
+attr: $(CMDSRC)/attr.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+backup: $(CMDSRC)/backup.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+binex: $(CMDSRC)/binex.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+build: $(CMDSRC)/build.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+copy: $(CMDSRC)/copy.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+date: $(CMDSRC)/date.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+del: $(CMDSRC)/del.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+deldir: $(CMDSRC)/deldir.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+dir: $(CMDSRC)/dir.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+display: $(CMDSRC)/display.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+dsave: $(CMDSRC)/dsave.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+dump: $(CMDSRC)/dump.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+edit: $(CMDSRC)/edit.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+echo: $(CMDSRC)/echo.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+exbin: $(CMDSRC)/exbin.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+free: $(CMDSRC)/free.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+format: $(CMDSRC)/format.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+ident: $(CMDSRC)/ident.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+link: $(CMDSRC)/link.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+list: $(CMDSRC)/list.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+load: $(CMDSRC)/load.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+login: $(CMDSRC)/login.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+makdir: $(CMDSRC)/makdir.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+merge: $(CMDSRC)/merge.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+mdir: $(CMDSRC)/mdir.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+mfree: $(CMDSRC)/mfree.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+os9gen: $(CMDSRC)/os9gen.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+#printerr: $(CMDSRC)/printerr.asm
+#	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+procs: $(CMDSRC)/procs.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+pwd: $(CMDSRC)/pd.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ -DPWD $<
+
+pxd: $(CMDSRC)/pd.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ -DPXD $<
+
+rename: $(CMDSRC)/rename.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+save: $(CMDSRC)/save.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+setime: $(CMDSRC)/setime.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+shell: $(MODSRC)/shell.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+sleep: $(CMDSRC)/sleep.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+tee: $(CMDSRC)/tee.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+tmode: $(CMDSRC)/tmode.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+tsmon: $(CMDSRC)/tsmon.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+unlink: $(CMDSRC)/unlink.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+utils: copy del dir attr merge backup rename 
+	cat $(CMDDIR)/copy $(CMDDIR)/del $(CMDDIR)/dir $(CMDDIR)/attr $(CMDDIR)/merge $(CMDDIR)/backup $(CMDDIR)/rename > $(CMDDIR)/utils
+
+verify: $(CMDSRC)/verify.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+xmode: $(CMDSRC)/xmode_ed2.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+#
+# graphics
+#
+
+basext: $(GRFSRC)/basext.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+chrset: $(GRFSRC)/chrset.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+gfxpack: $(GRFSRC)/gfxpack.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTC)/$@ $<
+
+graphics: basext gfxpack
+	cat $(CMDDIR)/basext $(CMDDIR)/gfxpack > $(CMDDIR)/graphics
+
+#
+# sys dir
+#
+
+errmsg: $(SYSSRC)/errmsg.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTS)/$@ $<
+
+md5: all
+	bash ./sums.sh > cmdsums.txt

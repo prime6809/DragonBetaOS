@@ -1,0 +1,23 @@
+/dx
+
+nam=d0 mgr=RBF ddr=wd2797
+hpn=0F hpa=FCE0 drv=0 stp=03 typ=00 dns=01 cyl=0028 sid=02
+vfy=00 sct=0010 t0s=000A ilv=04 sas=08 wpc= ofs= rwc=
+
+/fx
+
+nam=f0 mgr=RBF ddr=wd2797
+hpn=0F hpa=FCE0 drv=0 stp=03 typ=20 dns=01 cyl=0028 sid=02
+vfy=00 sct=0012 t0s=0012 ilv=04 sas=08 wpc= ofs= rwc=
+
+/ddx
+
+nam=d0 mgr=RBF ddr=wd2797
+hpn=0F hpa=FCE0 drv=0 stp=03 typ=00 dns=03 cyl=0050 sid=02
+vfy=00 sct=0010 t0s=000A ilv=04 sas=08 wpc= ofs= rwc=
+
+/fdx
+
+nam=f0 mgr=RBF ddr=wd2797
+hpn=0F hpa=FCE0 drv=0 stp=03 typ=20 dns=03 cyl=0050 sid=02
+vfy=00 sct=0012 t0s=0012 ilv=04 sas=08 wpc= ofs= rwc=

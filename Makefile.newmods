@@ -1,0 +1,220 @@
+#
+# Makefile for building the OS-9 modules (and utilities) for DragonMMC
+#
+
+include beta.mk
+
+AS=lwasm
+ASFLAGS=--6809 -fos9 --pragma=condundefzero,nosymbolcase -I $(DEFS)
+ASOUTM=-o$(NEWMODDIR)
+
+LISTDIR=listing
+
+ASLIST=-l$(LISTDIR)
+
+MODLIST=
+DISKMODS=d0 d1 d2 d3 f0 f1 f2 f3 dd0 dd1 dd2 dd3 fd0 fd1 fd2 fd3 dd
+OS9MODS=acia51 clock initnew ioman os9p2 p p1 pia pipe piper pipeman rbf scf screen sysgo term t1 
+BOOTMODS=shell wd2797 newboot bootdev bootdev2 os9p1
+
+BETAOS9MODS=beta-os9-mods.os9
+BETAOS9MODSNEW=beta-os9-mods-new.os9
+
+ROMNAME=beta_bt
+
+ATTRS=-e -q
+
+all: diskmods os9mods bootmods 
+
+diskmods: $(DISKMODS)
+
+os9mods: $(OS9MODS)
+
+newos9mods: $(NEWOS9MODS)
+
+bootmods: $(BOOTMODS)
+
+#
+# Modules disk files
+#
+
+acia51: $(MODSRC)/Acia51.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+#boot: $(MODSRC)/Boot.asm
+#	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+#bootdev: $(MODSRC)/bootdev.asm
+#	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+bootdev: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASFLAGS) -DDrive=0 -DCyls=40 -DSides=2 -DSecTrk=16 -DSecTr0=10 -DDrvTyp=0 -DIntrleav=4 \
+			         -DSAS=8 -DDensity=1 -DStpRat=$(STEP) -DBOOTDEV $(ASLIST)/$@.lst $(ASOUTM)/$@ $<	
+
+clock: $(MODSRC)/Clock.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+consdesc: $(MODSRC)/consdesc.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+#init: $(MODSRC)/Init.asm
+#	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+ioman: $(MODSRC)/IOMan_ed10.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+os9p1: $(MODSRC)/OS9p1_ed12.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+os9p2: $(MODSRC)/OS9p2_ed13.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+p: $(MODSRC)/p.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+p1: $(MODSRC)/p1.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+pia: $(MODSRC)/pia.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+pipe: $(MODSRC)/pipe.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+piper: $(MODSRC)/piper.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+pipeman: $(MODSRC)/pipeman.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+rbf: $(MODSRC)/rbf_ed16.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+scf: $(MODSRC)/SCF_ed3.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+screen: $(MODSRC)/screen_ed1.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+shell: $(MODSRC)/Shell.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+sysgo: $(MODSRC)/SysGo.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+term: $(MODSRC)/termdesc.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ -DEXTEND $<
+
+t1: $(MODSRC)/txdesc.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ -DEXTEND $<
+
+wd2797: $(MODSRC)/wd2797.asm
+	$(AS) $(ASFLAGS) -DNORETRY $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+wd2797_desc: $(MODSRC)/wd2797_desc.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
+
+
+#
+# Modified modules.....
+#
+
+initnew: $(MODSRC)/Init.asm
+	$(AS) $(ASFLAGS) -DUSEDD $(ASLIST)/$@.lst $(ASOUTM)/init $<
+	
+newboot: $(MODSRC)/NewBoot.asm
+	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/boot $<
+	
+dd: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) -DCyls=40 -DSides=2 -DSecTrk=18 -DSecTr0=18 -DDrvTyp=32\
+		-DIntrleav=4 -DSAS=8 -DDensity=1 -DStpRat=$(STEP) -DDrive=0 -DDEFAULT $(ASLIST)/$@.lst $<
+
+bootdev2: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASFLAGS) -DDrive=0 -DCyls=40 -DSides=2 -DSecTrk=18 -DSecTr0=18 -DDrvTyp=32 -DIntrleav=4 \
+					 -DSAS=8 -DDensity=1 -DStpRat=$(STEP) -DBOOTDEV2 $(ASLIST)/$@.lst $(ASOUTM)/$@ $<	
+
+#
+# Drive descriptors, assume all are 80 track DSDD.
+#	
+#
+# A Word about step rate, with the original Sony OA-D32W disks in the beta,
+# and the WD2797 running at 2MHz, then the step rate needs to be set to 3, 
+# this translates to a 15ms step rate, which is a good match for the OA-D32W's
+# stated step rate of 12ms.
+#
+# However, with the WD2797 set to 1MHz, this translates to a 30ms step which
+# makes the drives sloooooowwww :) Modern drives however typically have 3ms
+# step rates so the step rate can be set to 0, which is 6ms, this makes the 
+# drives much faster.
+#
+# STEP=		WD2797 2MHz	WD2797 1MHz
+#   3			15ms		30ms
+#	2   		10ms		20ms	
+#	1			6ms			12ms
+#	0			3ms			6ms
+#
+
+STEP		= 0
+
+DX			= -DCyls=40 -DSides=2 -DSecTrk=16 -DSecTr0=10 -DDrvTyp=0\
+			  -DIntrleav=4 -DSAS=8 -DDensity=1 -DStpRat=$(STEP) -DNAMED
+			  
+FX			= -DCyls=40 -DSides=2 -DSecTrk=18 -DSecTr0=18 -DDrvTyp=32\
+			  -DIntrleav=4 -DSAS=8 -DDensity=1 -DStpRat=$(STEP) -DNAMEF
+
+DDX			= -DCyls=80 -DSides=2 -DSecTrk=16 -DSecTr0=10 -DDrvTyp=0\
+			  -DIntrleav=4 -DSAS=8 -DDensity=3 -DStpRat=$(STEP) -DNAMEDD
+			  
+FDX			= -DCyls=80 -DSides=2 -DSecTrk=18 -DSecTr0=18 -DDrvTyp=32\
+			  -DIntrleav=4 -DSAS=8 -DDensity=3 -DStpRat=$(STEP) -DNAMEFD
+
+diskdefs: d0 d1 d2 d3 f0 f1 f2 f3 dd0 dd1 dd2 dd3 fd0 fd1 fd2 fd3
+	
+d0: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(DX) -DDrive=0 $(ASLIST)/$@.lst $<
+	
+d1: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(DX) -DDrive=1 $(ASLIST)/$@.lst $<
+
+d2: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(DX) -DDrive=2 $(ASLIST)/$@.lst $<
+
+d3: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(DX) -DDrive=3 $(ASLIST)/$@.lst $<
+
+f0: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(FX) -DDrive=0 $(ASLIST)/$@.lst $<
+
+f1: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(FX) -DDrive=1 $(ASLIST)/$@.lst $<
+
+f2: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(FX) -DDrive=2 $(ASLIST)/$@.lst $<
+
+f3: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(FX) -DDrive=3 $(ASLIST)/$@.lst $<
+
+dd0: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(DDX) -DDrive=0 $(ASLIST)/$@.lst $<
+
+dd1: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(DDX) -DDrive=1 $(ASLIST)/$@.lst $<
+
+dd2: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(DDX) -DDrive=2 $(ASLIST)/$@.lst $<
+
+dd3: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(DDX) -DDrive=3 $(ASLIST)/$@.lst $<
+
+fd0: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(FDX) -DDrive=0 $(ASLIST)/$@.lst $<
+
+fd1: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(FDX) -DDrive=1 $(ASLIST)/$@.lst $<
+
+fd2: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(FDX) -DDrive=2 $(ASLIST)/$@.lst $<
+
+fd3: $(MODSRC)/bdiskdesc.asm
+	$(AS) $(ASOUTM)/$@ $(ASFLAGS) $(FDX) -DDrive=3 $(ASLIST)/$@.lst $<
+

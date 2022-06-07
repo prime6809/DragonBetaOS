@@ -1,0 +1,54 @@
+******************************
+*
+* Drive Descriptor Module
+*
+*
+
+Type	set		DEVIC+OBJCT
+Revs	set		REENT+1
+		mod		DescEnd,DescName,Type,Revs,DscMgr,DscDrv
+		fcb		DIR.+SHARE.+PREAD.+PWRIT.+UPDAT.+EXEC.+PEXEC.
+
+		fcb		IOBlock/DAT.BlCt	; Port bank
+		fdb		DPort				; port address
+Density	set		1					; Double density
+Sides	set		2					; Double sided
+DrvTyp	set		0					; 5.25" drive
+Cyls	set		40
+SecTrk	set		16
+SecTr0	set		10
+Density	set		1+DDTr0
+		
+		fcb		DescName-*-1		; bytes of options
+		fcb		DT.RBF,Drive		; RBF device & drive no
+		fcb		StpRat
+		fcb		DrvTyp
+		fcb		Density
+		fdb		Cyls				; number of Cylinders
+		fcb		Sides
+		fcb		0					; verify turned on
+		fdb		SecTrk
+		fdb		SecTr0
+		fcb		IntrLeav			; Sector interleave offset
+		fcb		8					; Sector allocation size
+
+DescName set	*
+		fcb		N1					; first drive name letter
+		fcb		'0'+DrvNam+$80
+		fcb		0					; name padding
+		
+DscMgr	set		*
+		fcs		"RBF"				; rbfman
+		
+DscDrv	set		*
+		fcb		L1, L2, L3, L4, L5, L6+$80
+		
+		emod
+		
+Pass	set		1
+
+Drive	set		Drive+1
+DrvNam	set		DrvNam+1
+
+		
+		
