@@ -38,10 +38,10 @@ bootmods: $(BOOTMODS)
 # Modules disk files
 #
 
-acia51: $(MODSRC)/Acia51.asm
+acia51: $(MODSRC)/acia51.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
-#boot: $(MODSRC)/Boot.asm
+#boot: $(MODSRC)/boot.asm
 #	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
 #bootdev: $(MODSRC)/bootdev.asm
@@ -51,7 +51,7 @@ bootdev: $(MODSRC)/bdiskdesc.asm
 	$(AS) $(ASFLAGS) -DDrive=0 -DCyls=40 -DSides=2 -DSecTrk=16 -DSecTr0=10 -DDrvTyp=0 -DIntrleav=4 \
 			         -DSAS=8 -DDensity=1 -DStpRat=$(STEP) -DBOOTDEV $(ASLIST)/$@.lst $(ASOUTM)/$@ $<	
 
-clock: $(MODSRC)/Clock.asm
+clock: $(MODSRC)/clock.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
 consdesc: $(MODSRC)/consdesc.asm
@@ -60,13 +60,13 @@ consdesc: $(MODSRC)/consdesc.asm
 #init: $(MODSRC)/Init.asm
 #	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
-ioman: $(MODSRC)/IOMan_ed10.asm
+ioman: $(MODSRC)/ioman_ed10.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
-os9p1: $(MODSRC)/OS9p1_ed12.asm
+os9p1: $(MODSRC)/os9p1_ed12.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
-os9p2: $(MODSRC)/OS9p2_ed13.asm
+os9p2: $(MODSRC)/os9p2_ed13.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
 p: $(MODSRC)/p.asm
@@ -90,16 +90,16 @@ pipeman: $(MODSRC)/pipeman.asm
 rbf: $(MODSRC)/rbf_ed16.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
-scf: $(MODSRC)/SCF_ed3.asm
+scf: $(MODSRC)/scf_ed3.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
 screen: $(MODSRC)/screen_ed1.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
-shell: $(MODSRC)/Shell.asm
+shell: $(MODSRC)/shell.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
-sysgo: $(MODSRC)/SysGo.asm
+sysgo: $(MODSRC)/sysgo.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/$@ $<
 
 term: $(MODSRC)/termdesc.asm
@@ -119,10 +119,10 @@ wd2797_desc: $(MODSRC)/wd2797_desc.asm
 # Modified modules.....
 #
 
-initnew: $(MODSRC)/Init.asm
+initnew: $(MODSRC)/init.asm
 	$(AS) $(ASFLAGS) -DUSEDD $(ASLIST)/$@.lst $(ASOUTM)/init $<
 	
-newboot: $(MODSRC)/NewBoot.asm
+newboot: $(MODSRC)/newboot.asm
 	$(AS) $(ASFLAGS) $(ASLIST)/$@.lst $(ASOUTM)/boot $<
 	
 dd: $(MODSRC)/bdiskdesc.asm
